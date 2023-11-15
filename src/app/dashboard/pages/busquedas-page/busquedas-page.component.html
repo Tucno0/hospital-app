@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-12">
+    <h4>Se han encontrado {{totalResultados}} resultados</h4>
+    <hr>
+  </div>
+</div>
+
+<div class="row animated fadeIn">
+  <div class="col-4">
+    <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Usuarios ({{totalUsuarios}})</h4>
+          <h6 class="card-subtitle">Usuarios registrados en el sistema</h6>
+
+          <div *ngIf="totalUsuarios == 0" class="alert alert-info">
+            <p class="mb-0">
+              No hay usuarios con ese termino de busqueda
+            </p>
+          </div>
+
+          <div *ngIf="totalUsuarios != 0" class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th class="w100">Avatar</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let usuario of usuarios" class="animated fadeIn">
+                          <td>
+                            <img [src]="usuario.img | imagen : usuariosColeccion" [alt]="usuario.nombre" class="img-fluid">
+                          </td>
+                          <td>{{ usuario.nombre }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Medicos ({{totalMedicos}})</h4>
+          <h6 class="card-subtitle">Medicos registrados en el sistema</h6>
+
+          <div *ngIf="totalMedicos == 0" class="alert alert-info">
+            <p class="mb-0">
+              No hay medicos con ese termino de busqueda
+            </p>
+          </div>
+
+          <div *ngIf="totalMedicos != 0" class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th class="w100">Avatar</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let medico of medicos" (click)="abrirMedico(medico._id)" class=" cursor fadeIn">
+                          <td>
+                            <img [src]="medico.img | imagen : medicosColeccion" [alt]="medico.nombre" class="img-fluid">
+                          </td>
+                          <td>{{ medico.nombre }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Hospitales ({{totalHospitales}})</h4>
+          <h6 class="card-subtitle">Hospitales registrados en el sistema</h6>
+
+          <div *ngIf="totalHospitales == 0" class="alert alert-info">
+            <p class="mb-0">
+              No hay hospitales con ese termino de busqueda
+            </p>
+          </div>
+
+          <div *ngIf="totalHospitales != 0" class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th class="w100">Avatar</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let hospital of hospitales" class="animated fadeIn">
+                          <td>
+                            <img [src]="hospital.img | imagen : hospitalesColeccion" [alt]="hospital.nombre" class="img-fluid">
+                          </td>
+                          <td>{{ hospital.nombre }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

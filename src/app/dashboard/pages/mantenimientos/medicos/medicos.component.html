@@ -1,0 +1,99 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #txtBuscar
+          type="text"
+          class="form-control"
+          placeholder="Buscar hospital..."
+          (keyup)="buscarMedico(txtBuscar.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="estaCargando" class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!estaCargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+
+          <div class="">
+            <h4 class="card-title">Medicos</h4>
+            <h6 class="card-subtitle">
+              Total de medicos registrados en el sistema (
+              <span class="label label-rouded label-themecolor">
+                {{ totalMedicos }}
+              </span>
+              )
+            </h6>
+          </div>
+
+          <button
+            routerLink="/dashboard/medico/nuevo"
+            class="btn btn-outline-info waves-effect waves-light"
+            type="button"
+          >
+            <span class="btn-label"><i class="fa fa-plus"></i></span>Agregar Medico
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="w100">Foto</th>
+                <th>Nombre</th>
+                <th class="text-nowrap" style="width: 250px">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let medico of medicos">
+                <td>
+                  <img
+                    [src]="medico.img | imagen : coleccion"
+                    [alt]="medico.nombre"
+                    (click)="abrirModal(medico)"
+                    class="cursor"
+                    width="100"
+                  />
+                </td>
+
+                <td>{{ medico.nombre }}</td>
+
+                <td class="text-nowrap text-center w100">
+                  <a class="cursor" [routerLink]="['/dashboard/medico', medico._id]"
+                  routerLinkActive="router-link-active">
+                    <span class="badge badge-success font-18">Editar</span>
+                  </a>
+                  &nbsp;
+                  <a class="cursor" (click)="borrarMedico(medico)">
+                    <span class="badge badge-danger font-18">Eliminar</span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <button class="btn btn-secondary">Anteriores</button>
+            &nbsp;
+            <button class="btn btn-secondary">Anteriores</button> -->
+      </div>
+    </div>
+  </div>
+</div>

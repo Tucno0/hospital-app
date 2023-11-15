@@ -1,0 +1,105 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #txtBuscar
+          type="text"
+          class="form-control"
+          placeholder="Buscar hospital..."
+          (keyup)="buscarHospital(txtBuscar.value)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="cargando" class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="">
+            <h4 class="card-title">Hospitales</h4>
+            <h6 class="card-subtitle">
+              Total de hospitales registrados en el sistema (
+              <span class="label label-rouded label-themecolor">
+                {{ totalHospitales }}
+              </span>
+              )
+            </h6>
+          </div>
+
+          <button
+            class="btn btn-outline-info waves-effect waves-light"
+            type="button"
+            (click)="crearHospital()"
+          >
+            <span class="btn-label"><i class="fa fa-plus"></i></span>Agregar Hospital
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="w100">Foto</th>
+                <th>Nombre</th>
+                <th class="text-nowrap">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let hospital of hospitales">
+                <td class="text-center">
+                  <img
+                    [src]="hospital.img | imagen : coleccion"
+                    [alt]="hospital.nombre"
+                    (click)="abrirModal(hospital)"
+                    class="cursor"
+                    width="100"
+                  />
+                  <!-- <span>{{ hospital.img | imagen : coleccion }}</span> -->
+                </td>
+
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="hospital.nombre"
+                    class="form-control"
+                    placeholder="Nombre del hospital"
+                  />
+                </td>
+
+                <td class="text-nowrap text-center w100">
+                  <a class="cursor" (click)="guardarCambios(hospital)">
+                    <span class="badge badge-success">Guardar</span>
+                  </a>
+                  &nbsp;
+                  <a class="cursor" (click)="eliminarHospital(hospital)">
+                    <span class="badge badge-danger">Eliminar</span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button class="btn btn-secondary">Anteriores</button>
+        &nbsp;
+        <button class="btn btn-secondary">Anteriores</button>
+      </div>
+    </div>
+  </div>
+</div>

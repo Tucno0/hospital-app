@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Striped Progress bar</h4>
+
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-primary progress-bar-striped active"
+            aria-valuenow="85"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="height: 8px"
+            role="progressbar"
+            [ngStyle]="{ width: progreso1 + '%' }"
+          ></div>
+        </div>
+
+        <div class="progress m-t-20">
+          <div
+            class="progress-bar bg-danger progress-bar-striped active"
+            aria-valuenow="85"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="height: 8px"
+            role="progressbar"
+            [ngStyle]="{ width: progreso2 + '%' }"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+        <dashboard-incrementador
+          (onProgreso)="progreso1 = $event"
+          [progreso]="progreso1"
+        />
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+        <dashboard-incrementador
+          (onProgreso)="progreso2 = $event"
+          [progreso]="progreso2"
+          btnClass="btn btn-danger"
+        />
+      </div>
+    </div>
+  </div>
+</div>
